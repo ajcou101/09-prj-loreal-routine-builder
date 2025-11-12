@@ -1,3 +1,19 @@
+/* Flex header for selected products section */
+.selected-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.selected-products-header h2 {
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.clear-all-btn {
+  margin-bottom: 0;
+}
 /* —— basic reset —— */
 * {
   box-sizing: border-box;
@@ -22,18 +38,25 @@ body {
 .site-header {
   text-align: center;
   padding-top: 50px;
-  padding-bottom: 10px;
+  padding-bottom: 38px;
+  background: #000;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  border-bottom: 6px solid #E3A535;
 }
 
 .logo {
   width: 250px;
   margin-bottom: 15px;
+  filter: brightness(0) invert(1);
 }
 
 .site-title {
   font-size: 22px;
   font-weight: 500;
   margin-bottom: 10px;
+  color: #fff;
 }
 
 /* category filter */
@@ -282,7 +305,7 @@ body {
 .clear-all-btn {
   margin-bottom: 10px;
   padding: 8px 16px;
-  background: #ff4d4d;
+  background: #ff003b;
   color: white;
   border: none;
   border-radius: 4px;
@@ -290,25 +313,28 @@ body {
 }
 
 .clear-all-btn:hover {
-  background: #ff1a1a;
+  background: #dd0034;
 }
 
-/* Highlight selected product cards */
+
+/* Highlight selected product cards (gray) */
 .product-card.selected {
-  border: 2px solid #007bff;
-  background-color: #e6f0ff;
+  border: 2px solid #888;
+  background-color: #f0f0f0;
 }
 
-/* Style for the selected product box */
+
+/* Style for the selected product box (gray) */
 .selected-product-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 2px solid #007bff;
+  border: 2px solid #888;
   border-radius: 8px;
-  background-color: #e6f0ff;
+  background-color: #f0f0f0;
   margin-bottom: 10px;
+  gap: 10px;
 }
 
 /* Style for product titles in the Selected Products section */
@@ -320,14 +346,14 @@ body {
 
 /* Style for the remove button */
 .selected-product-box .remove-btn {
-  background-color: #ff4d4d;
+  background-color: #ff003b;
   color: white;
   border: none;
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 8px 16px;
   cursor: pointer;
 }
 
 .selected-product-box .remove-btn:hover {
-  background-color: #ff1a1a;
+  background-color: #dd0034;
 }

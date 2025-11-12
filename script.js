@@ -212,9 +212,24 @@ generateRoutineBtn.addEventListener("click", async () => {
   });
 
   // Prepare the prompt for OpenAI
-  const prompt = `Generate a personalized skincare routine based on these selected products: ${JSON.stringify(
-    selectedProductData
-  )}. Provide a step-by-step routine, including when to use each product (morning, evening, etc.), and any tips.`;
+  const prompt = `Generate a personalized skincare routine based on these selected products: 
+   -- PRODUCT DATA --
+    ${JSON.stringify(selectedProductData)}. 
+    -- OUTPUT FORMATTING: --
+    Here is your custom skincare routine:\n
+    1. Morning:
+     - List name of products to use in the morning with brief instructions.
+    2. Afternoon:
+     - List name of products to use in the morning with brief instructions.
+    3. Evening:
+     - List name of products to use in the morning with brief instructions.
+    4. Tips:
+     Write down any tips that you could give to the user regarding the usage of these products.
+     
+     -- OUTPUT FORMATTING NOTES --
+     Ensure that your output does not exceed 4096 tokens.
+     Ensure proper spacing between the Morning, Afternoon, Evening, and Tips sections.`;
+    
 
   try {
     // Send request to Cloudflare Worker (replace with your actual worker URL)
@@ -265,5 +280,9 @@ clearAllBtn.addEventListener("click", () => {
 
 /* Initialize the page */
 document.addEventListener("DOMContentLoaded", () => {
+  // Reset category selection to default
+  if (categoryFilter) {
+    categoryFilter.selectedIndex = 0;
+  }
   loadProducts().then((products) => updateSelectedProductsList(products));
 });
