@@ -227,8 +227,7 @@ generateRoutineBtn.addEventListener("click", async () => {
      Write down any tips that you could give to the user regarding the usage of these products.
      
      -- OUTPUT FORMATTING NOTES --
-     Ensure that your output does not exceed 4096 tokens.
-     Ensure proper spacing between the Morning, Afternoon, Evening, and Tips sections.`;
+     Ensure that your output does not exceed 4096 tokens.`;
     
 
   try {
