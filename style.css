@@ -81,6 +81,22 @@ body {
   margin-bottom: 20px;
 }
 
+/* Styles for user and AI messages in chat */
+.user-message {
+  background: #e6f0ff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  text-align: right;
+}
+
+.ai-message {
+  background: #f0f0f0;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
 /* placeholder message */
 .placeholder-message {
   width: 100%;
@@ -88,6 +104,14 @@ body {
   padding: 40px;
   color: #666;
   font-size: 18px;
+}
+
+/* Placeholder message for empty selected products */
+.selected-products .placeholder-message {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin: 10px 0;
 }
 
 /* input row */
@@ -252,4 +276,58 @@ body {
 
 .generate-btn i {
   margin-right: 8px;
+}
+
+/* Style for the Clear All button */
+.clear-all-btn {
+  margin-bottom: 10px;
+  padding: 8px 16px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-all-btn:hover {
+  background: #ff1a1a;
+}
+
+/* Highlight selected product cards */
+.product-card.selected {
+  border: 2px solid #007bff;
+  background-color: #e6f0ff;
+}
+
+/* Style for the selected product box */
+.selected-product-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background-color: #e6f0ff;
+  margin-bottom: 10px;
+}
+
+/* Style for product titles in the Selected Products section */
+.selected-product-box .product-title {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Style for the remove button */
+.selected-product-box .remove-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.selected-product-box .remove-btn:hover {
+  background-color: #ff1a1a;
 }
