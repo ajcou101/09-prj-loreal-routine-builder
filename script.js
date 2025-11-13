@@ -185,6 +185,11 @@ chatForm.addEventListener("submit", async (e) => {
 
   try {
     // Send the conversation history to the OpenAI API via Cloudflare Worker
+    const systemMessage = {
+      role: "system",
+      content: "You are a chatbot assistant for L'Oréal. Only answer questions related to L'Oréal products, skincare routines, beauty advice, and product recommendations. If the question is not related to L'Oréal or beauty topics, politely redirect the conversation back to L'Oréal products and routines."
+    };
+    const messagesToSend = [systemMessage, ...conversationHistory];
     const response = await fetch(
       "https://loreal-worker.dark-gate5480.workers.dev/",
       {
@@ -193,7 +198,7 @@ chatForm.addEventListener("submit", async (e) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          messages: conversationHistory,
+          messages: messagesToSend,
         }),
       }
     );
@@ -236,7 +241,7 @@ generateRoutineBtn.addEventListener("click", async () => {
   });
 
   // Prepare the prompt for OpenAI
-  const prompt = `Generate a personalized skincare, haircare, or beauty routine based on these selected products: 
+  const prompt = `You are a chatbot assistant for L'Oréal. Generate a personalized skincare, haircare, or beauty routine based on these selected products: 
    -- PRODUCT DATA --
     ${JSON.stringify(selectedProductData)}. 
     -- OUTPUT FORMATTING: --
