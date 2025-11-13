@@ -240,20 +240,21 @@ generateRoutineBtn.addEventListener("click", async () => {
    -- PRODUCT DATA --
     ${JSON.stringify(selectedProductData)}. 
     -- OUTPUT FORMATTING: --
-    Here is your custom skincare routine:\n
-    1. Morning:
-     - List name of products to use in the morning with brief instructions.
-    2. Afternoon:
-     - List name of products to use in the morning with brief instructions.
-    3. Evening:
-     - List name of products to use in the morning with brief instructions.
-    4. Tips:
-     Write down any tips that you could give to the user regarding the usage of these products.
+    Here is your custom skincare routine:<br><br>
+    <strong>1. Morning:</strong><br>
+     - List name of products to use in the morning with brief instructions.<br><br>
+    <strong>2. Afternoon:</strong><br>
+     - List name of products to use in the morning with brief instructions.<br><br>
+    <strong>3. Evening:</strong><br>
+     - List name of products to use in the morning with brief instructions.<br><br>
+    <strong>4. Tips:</strong><br>
+     Write down any tips that you could give to the user regarding the usage of these products.<br><br>
      
      -- OUTPUT FORMATTING NOTES --
      Ensure that your output does not exceed 4096 tokens.
-     Ensure that your routine is talored only to the products mentioned.
-     Keep your routine concise, and easy to follow.`;
+     Ensure that your routine is tailored only to the products mentioned.
+     Keep your routine concise, and easy to follow.
+     Use HTML tags like <strong> for bold and <br> for line breaks to format the output clearly.`;
     
   // Display generating message
   appendMessage("assistant", "Generating your routine...");
