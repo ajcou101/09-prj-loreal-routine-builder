@@ -18,12 +18,16 @@ productsContainer.innerHTML = `
 async function loadProducts() {
   const response = await fetch("products.json");
   const data = await response.json();
-  return data.products;
+  allProducts = data.products;
+  return allProducts;
 }
 
 /* Track selected products */
 let selectedProducts =
   JSON.parse(localStorage.getItem("selectedProducts")) || [];
+
+/* Global products array */
+let allProducts = [];
 
 /* Function to save selected products to localStorage */
 function saveSelectedProducts() {
@@ -43,6 +47,7 @@ function displayProducts(products) {
       <div class="product-info">
         <h3>${product.name}</h3>
         <p>${product.brand}</p>
+        <button class="more-info-btn" data-product-id="${product.id}">More Info</button>
       </div>
     </div>
   `
@@ -53,6 +58,17 @@ function displayProducts(products) {
   const productCards = document.querySelectorAll(".product-card");
   productCards.forEach((card) => {
     card.addEventListener("click", () => toggleProductSelection(card));
+  });
+
+  /* Add click event listeners to more info buttons */
+  const moreInfoButtons = document.querySelectorAll(".more-info-btn");
+  moreInfoButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent triggering the card click event
+      const productId = parseInt(button.getAttribute("data-product-id"));
+      const product = products.find((p) => p.id === productId);
+      showProductModal(product);
+    });
   });
 
   /* Highlight selected products */
@@ -99,6 +115,14 @@ function appendMessage(role, content) {
   messageDiv.innerHTML = content;
   chatWindow.appendChild(messageDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+/* Function to show product modal */
+function showProductModal(product) {
+  document.getElementById("modalTitle").textContent = product.name;
+  document.getElementById("modalImage").src = product.image;
+  document.getElementById("modalDescription").textContent = product.description;
+  document.getElementById("productModal").style.display = "block";
 }
 
 /* Remove product from selection */
@@ -212,7 +236,7 @@ generateRoutineBtn.addEventListener("click", async () => {
   });
 
   // Prepare the prompt for OpenAI
-  const prompt = `Generate a personalized skincare routine based on these selected products: 
+  const prompt = `Generate a personalized skincare, haircare, or beauty routine based on these selected products: 
    -- PRODUCT DATA --
     ${JSON.stringify(selectedProductData)}. 
     -- OUTPUT FORMATTING: --
@@ -227,8 +251,12 @@ generateRoutineBtn.addEventListener("click", async () => {
      Write down any tips that you could give to the user regarding the usage of these products.
      
      -- OUTPUT FORMATTING NOTES --
-     Ensure that your output does not exceed 4096 tokens.`;
+     Ensure that your output does not exceed 4096 tokens.
+     Ensure that your routine is talored only to the products mentioned.
+     Keep your routine concise, and easy to follow.`;
     
+  // Display generating message
+  appendMessage("assistant", "Generating your routine...");
 
   try {
     // Send request to Cloudflare Worker (replace with your actual worker URL)
@@ -284,4 +312,15 @@ document.addEventListener("DOMContentLoaded", () => {
     categoryFilter.selectedIndex = 0;
   }
   loadProducts().then((products) => updateSelectedProductsList(products));
+
+  // Modal event listeners
+  document.querySelector(".close").addEventListener("click", () => {
+    document.getElementById("productModal").style.display = "none";
+  });
+
+  window.addEventListener("click", (event) => {
+    if (event.target == document.getElementById("productModal")) {
+      document.getElementById("productModal").style.display = "none";
+    }
+  });
 });
